@@ -18,11 +18,15 @@ O modelo de negócios é parecido com o do Mercado Livre ou do Uber: nós fornec
 
 Sua missão é criar uma *feature* que existe no Easy Carros Docs: controle de veículos da frota.
 
-A API com o qual a aplicação deve se comunicar está inclusa neste repositório. Veja abaixo a lista de `endpoints` disponiveis.
+A [API](#a-api) com o qual a aplicação deve se comunicar está inclusa neste repositório. 
+
+**Você deverá executá-la para poder se comunicar com ela**. Veja as [instruções](#pré-requisitos).
+
+[Aqui](#endpoints) está a lista de _endpoints_ disponiveis, quais dados devem ser enviados e quais serão retornados.
 
 ### 1. Tela de login
 
-\*\*\* WIREFRAME \*\*\*
+![Tela de login](wireframes/01-LOGIN.png)
 
 #### Permitir que o usuário se autentique na aplicação
 
@@ -44,7 +48,7 @@ Credenciais válidas:
 
 ### 2. Tela de lista de veículos
 
-\*\*\* WIREFRAME \*\*\*
+![Tela de lista de veículos](wireframes/02-LIST.png)
 
 #### Permitir que o usuário visualize seus veículos
 
@@ -73,8 +77,87 @@ Exibir a lista de todos os veículos do usuário mostrando:
         - Caso negativo 
             - Manter a lista como está
 
-## A API fornecida
+## As regras do jogo
 
+- 📃 A aplicação **deve** ser uma SPA ou um mobile app.
+- 🈴 Use o framework com o qual você se sente mais confortável (aqui nós utilizamos principalmente **React** e **ReactNative**, mas qualquer framework "mainstream" é bem vindo).
+- 🖌️ Fique à vontade para modificar a aparência das telas; os wireframes são apenas para referência.
+- 🛰️ Use qualquer bibloteca para conseguir se comunicar com o backend.
+- 🚢 Envie seu código para um repositório público para leitura (Github, Bitbucket, Gitlab, etc.).
+- 🗒️ Crie um arquivo `README` na raiz do projeto com instruções detalhadas de como executar seu código.
+
+### Bônus
+
+- 📑 Unit tests para seus componentes.
+
+### Como vou ser avaliado?
+
+Vamos analisar seu código com respeito a:
+
+- Qualidadade de código
+    - Keep it simple! (KISS)
+- Boas práticas
+    - Separation of Concerns (SoC)
+    - Design patterns (se houver necessidade)
+    - Clean code
+- Code styling
+    - Use um code linter 🙏
+
+O que **NÃO** vamos analisar:
+
+- Performance
+- Escolha da tecnologia A em vez da B
+
+## Para onde enviar seu repositório
+
+Envie um email para `tech@easycarros.com` com o assunto `Desafio Frontend - [SEU NOME]` contendo o link para o repositório que você criou.
+
+---
+
+
+
+## A API
+
+### Pré-requisitos
+
+Você deve instalar os seguintes pacotes antes de prosseguir:
+
+ - [`yarn`](https://yarnpkg.com/lang/en/docs/install)
+
+### Executando o servidor da API
+
+Na raiz deste projeto, rode:
+
+```bash
+cd ./api
+yarn install # vai demorar um pouco
+yarn start # o servidor irá escutar a porta 8181 por padrão
+```
+
+Se tudo correr bem, você verá a seguinte mensagem no seu terminal:
+
+> App is listening on http://localhost:8181
+
+#### Solução de problemas
+
+Se ao executar `yarn start` você se deparar com um erro parecido com:
+
+```
+> Error: listen EADDRINUSE :::8181
+>    at Server.setupListenHandle [as _listen2] (net.js:1330:14)
+>    at listenInCluster (net.js:1378:12)
+>    at Server.listen (net.js:1466:7)
+>    ...
+```
+
+Significa que a porta `8181` está em uso no seu computador. Para utilizar uma porta diferente, rode:
+
+```bash
+PORT='<OUTRA PORTA>' yarn start
+```
+
+
+### Endpoints
 Este repositório contém a API que será utilizada como backend da sua aplicação. Ela possui 3 endpoints:
 
 1. `POST /auth`
@@ -146,7 +229,7 @@ Este repositório contém a API que será utilizada como backend da sua aplicaç
                 }
                 ```
 
-2. `POST /vehicle`
+3. `POST /vehicle`
     - Headers:
         - Content-Type: `application/json`
         - Authorization: `Bearer {{token}}`
@@ -158,7 +241,7 @@ Este repositório contém a API que será utilizada como backend da sua aplicaç
         }
         ```
     - Response:
-        - Quando o token é válido:
+        - Quando o token e a placa são válidos:
             - Status Code: `200`
             - Body:
                 ```javascript
@@ -179,8 +262,18 @@ Este repositório contém a API que será utilizada como backend da sua aplicaç
                     }
                 }
                 ```
+        - Quando a placa é inválida ou inexistente:
+            - Status Code: `400`
+            - Body:
+                ```javascript
+                {
+                    "error": {
+                        "message": String
+                    }
+                }
+                ```
 
-2. `DELETE /vehicle/{{id}}`
+4. `DELETE /vehicle/{{id}}`
     - Headers:
         - Content-Type: `application/json`
         - Authorization: `Bearer {{token}}`
@@ -199,37 +292,3 @@ Este repositório contém a API que será utilizada como backend da sua aplicaç
                     }
                 }
                 ```
-
-## As regras do jogo
-
-- 📃 A aplicação **deve** ser uma SPA ou um mobile app.
-- 🈴 Use o framework com o qual você se sente mais confortável (aqui nós utilizamos principalmente **React** e **ReactNative**, mas qualquer framework "mainstream" é bem vindo).
-- 🛰️ Use qualquer bibloteca para conseguir se comunicar com o backend.
-- 🚢 Envie seu código para um repositório público para leitura (Github, Bitbucket, Gitlab, etc.).
-- 🗒️ Crie um arquivo `README` na raiz do projeto com instruções detalhadas de como executar seu código.
-
-### Bônus
-
-- 📑 Unit tests para seus componentes.
-
-### Como vou ser avaliado?
-
-Vamos analisar seu código com respeito a:
-
-- Qualidadade de código
-    - Keep it simple! (KISS)
-- Boas práticas
-    - Separation of Concerns (SoC)
-    - Design patterns (se houver necessidade)
-    - Clean code
-- Code styling
-    - Use um code linter 🙏
-
-O que **NÃO** vamos analisar:
-
-- Performance
-- Escolha da tecnologia A em vez da B
-
-## Para onde enviar seu repositório
-
-Envie um email para `tech@easycarros.com` com o assunto `Desafio Frontend - [SEU NOME]` contendo o link para o repositório que você criou.
