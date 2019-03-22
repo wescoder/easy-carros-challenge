@@ -43,6 +43,7 @@ Ao receber a resposta do servidor:
 Informações adicionais:
 
 Credenciais válidas:
+
 - E-mail: `frontend-dev@easycarros.com`
 - Senha: `Fr0nt3ndR0ck5!`
 
@@ -158,41 +159,38 @@ PORT='<OUTRA PORTA>' yarn start
 
 
 ### Endpoints
-Este repositório contém a API que será utilizada como backend da sua aplicação. Ela possui 3 endpoints:
+Este repositório contém a API que será utilizada como backend da sua aplicação. Ela possui os seguintes endpoints:
 
 1. `POST /auth`
     - Headers:
         - Content-Type: `application/json`
     - Body:
 
-        ```javascript
-        {
-            "email": String
-            "password": String
-        }
-        ```
+            {
+                "email": String
+                "password": String
+            }
 
     - Response:
         - Quando as credenciais são válidas:
             - Status Code: `200`
             - Body:
-                ```javascript
-                {
-                    "data": {
-                        "token": String
+
+                    {
+                        "data": {
+                            "token": String
+                        }
                     }
-                }
-                ```
+
         - Quando as credenciais são inválidas:
             - Status Code: `401`
             - Body:
-                ```javascript
-                {
-                    "error": {
-                        "message": String
+
+                    {
+                        "error": {
+                            "message": String
+                        }
                     }
-                }
-                ```
 
 2. `GET /vehicle`
     - Headers:
@@ -203,31 +201,30 @@ Este repositório contém a API que será utilizada como backend da sua aplicaç
         - Quando o token é válido:
             - Status Code: `200`
             - Body:
-                ```javascript
-                {
-                    "data": [
-                        {
-                            "id": String
-                            "plate": String
-                        },
-                        {
-                            "id": String
-                            "plate": String
-                        },
-                        // ...
-                    ]
-                }
-                ```
+
+                    {
+                        "data": [
+                            {
+                                "id": String
+                                "plate": String
+                            },
+                            {
+                                "id": String
+                                "plate": String
+                            },
+                            // ...
+                        ]
+                    }
+
         - Quando o token é inválido ou inexistente:
             - Status Code: `401`
             - Body:
-                ```javascript
-                {
-                    "error": {
-                        "message": String
+
+                    {
+                        "error": {
+                            "message": String
+                        }
                     }
-                }
-                ```
 
 3. `POST /vehicle`
     - Headers:
@@ -235,43 +232,42 @@ Este repositório contém a API que será utilizada como backend da sua aplicaç
         - Authorization: `Bearer {{token}}`
 
     - Body:
-        ```javascript
-        {
-            "plate": String
-        }
-        ```
+
+            {
+                "plate": String
+            }
+
     - Response:
         - Quando o token e a placa são válidos:
             - Status Code: `200`
             - Body:
-                ```javascript
-                {
-                    "data": {
-                        "id": String,
-                        "plate": String
+
+                    {
+                        "data": {
+                            "id": String,
+                            "plate": String
+                        }
                     }
-                }
-                ```
+
         - Quando o token é inválido ou inexistente:
             - Status Code: `401`
             - Body:
-                ```javascript
-                {
-                    "error": {
-                        "message": String
+
+                    {
+                        "error": {
+                            "message": String
+                        }
                     }
-                }
-                ```
+
         - Quando a placa é inválida ou inexistente:
             - Status Code: `400`
             - Body:
-                ```javascript
-                {
-                    "error": {
-                        "message": String
+            
+                    {
+                        "error": {
+                            "message": String
+                        }
                     }
-                }
-                ```
 
 4. `DELETE /vehicle/{{id}}`
     - Headers:
@@ -281,14 +277,12 @@ Este repositório contém a API que será utilizada como backend da sua aplicaç
     - Response:
         - Quando o token é válido:
             - Status Code: `204`
-
         - Quando o token é inválido ou inexistente:
             - Status Code: `401`
             - Body:
-                ```javascript
-                {
-                    "error": {
-                        "message": String
+
+                    {
+                        "error": {
+                            "message": String
+                        }
                     }
-                }
-                ```
