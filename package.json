@@ -1,0 +1,60 @@
+{
+  "name": "easy-carros-challenge",
+  "version": "1.0.0",
+  "description": "Challenge for front end position @EasyCarros",
+  "main": "src/index.tsx",
+  "scripts": {
+    "api": "node api/server.js",
+    "build": "webpack --mode production",
+    "opn": "node -r dotenv-extended/config bin/opn.js",
+    "serve": "webpack-dev-server --mode development --hot",
+    "dev": "run-p start opn",
+    "start": "run-p api serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/easycarros/frontend-challenge.git"
+  },
+  "author": "Wésley Queiroz <wesley.coder@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/wescoder/easy-carros-challenge/issues"
+  },
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/easycarros/frontend-challenge/src/master/",
+  "dependencies": {
+    "@emotion/core": "^10.0.10",
+    "hookrouter": "^1.1.4",
+    "immer": "^2.1.5",
+    "localforage": "^1.7.3",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "use-debounce": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^11.13.0",
+    "@types/react": "^16.8.12",
+    "@types/react-dom": "^16.8.3",
+    "@typescript-eslint/eslint-plugin": "^1.6.0",
+    "@typescript-eslint/parser": "^1.6.0",
+    "awesome-typescript-loader": "^5.2.1",
+    "commander": "^2.20.0",
+    "dotenv-extended": "^2.4.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-emotion": "^10.0.7",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-hooks": "^1.6.0",
+    "html-webpack-plugin": "^3.2.0",
+    "npm-run-all": "^4.1.5",
+    "open": "^6.1.0",
+    "opn": "^6.0.0",
+    "prettier": "^1.16.4",
+    "typescript": "^3.4.2",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1",
+    "webpack-dotenv-plugin": "^2.1.0"
+  }
+}
