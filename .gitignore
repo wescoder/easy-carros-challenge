@@ -36,3 +36,4 @@ dist/
 !.env.schema
 .data-vehicles
 .tmp-chrome
+.DS_Store
