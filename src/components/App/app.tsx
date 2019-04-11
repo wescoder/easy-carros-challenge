@@ -1,4 +1,4 @@
-import { AuthContext, DefaultAuthContext } from '@ec/pages/Auth'
+import { AuthContext, DefaultAuthContext } from '@ec/contexts/useAuth'
 import NotFound from '@ec/pages/NotFound'
 import { routes } from '@ec/pages/routes'
 import { useRoutes } from 'hookrouter'

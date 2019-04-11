@@ -1,4 +1,4 @@
-import { useAuth, useNotAuth } from '@ec/util/useAuth'
+import { useAuth, useNotAuth } from '@ec/contexts/useAuth'
 import * as React from 'react'
 import { ReactElement } from 'react'
 import Auth from './Auth'

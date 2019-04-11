@@ -1,6 +1,15 @@
-import { AuthContext } from '@ec/pages/Auth'
 import { navigate } from 'hookrouter'
-import { useContext } from 'react'
+import { createContext, useContext } from 'react'
+
+export interface AuthType {
+  isLoggedIn: boolean
+}
+
+export const DefaultAuthContext: AuthType = {
+  isLoggedIn: false,
+}
+
+export const AuthContext = createContext<AuthType>(DefaultAuthContext)
 
 export function useAuth(): boolean {
   const { isLoggedIn } = useContext(AuthContext)

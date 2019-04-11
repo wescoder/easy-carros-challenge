@@ -1,22 +1,14 @@
 /** @jsx jsx */
 import { useForm } from '@ec/util/useForm'
 import { css, jsx, SerializedStyles } from '@emotion/core'
-import { createContext, Fragment as F, ReactElement, useState } from 'react'
+import { Fragment as F, ReactElement, useState } from 'react'
+
+const { API_URL } = process.env
 
 const invalidInputCss: SerializedStyles = css({
   color: 'red',
   borderColor: 'red',
 })
-
-export interface AuthType {
-  isLoggedIn: boolean
-}
-
-export const DefaultAuthContext: AuthType = {
-  isLoggedIn: false,
-}
-
-export const AuthContext = createContext<AuthType>(DefaultAuthContext)
 
 const authFormInputs = {
   email: {
@@ -37,9 +29,10 @@ export function Auth(): ReactElement<{}> {
   const [isLoggingIn, setLoggingIn] = useState(false)
   const { inputs, isFormValid, handleChanges, handleSubmit } = useForm({
     inputs: authFormInputs,
-    submit: (state): void => {
+    submit: async (state): Promise<void> => {
       setLoggingIn(true)
       console.log(state)
+      const loginResponse = await fetch(`${API_URL}/auth`)
       setLoggingIn(false)
     },
   })
