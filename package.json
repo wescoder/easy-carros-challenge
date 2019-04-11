@@ -1,6 +1,6 @@
 {
   "name": "easy-carros-challenge",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Challenge for front end position @EasyCarros",
   "main": "src/index.tsx",
   "scripts": {
