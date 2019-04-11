@@ -1,17 +1,12 @@
 /** @jsx jsx */
-import {
-  loginFormInitialState,
-  loginFormReducer,
-} from '@ec/pages/Auth/form.state'
-import { inputChangeCb } from '@ec/util/eventCallback'
-import { jsx } from '@emotion/core'
-import {
-  createContext,
-  FormEvent,
-  Fragment as F,
-  ReactElement,
-  useReducer,
-} from 'react'
+import { useForm } from '@ec/util/useForm'
+import { css, jsx, SerializedStyles } from '@emotion/core'
+import { createContext, Fragment as F, ReactElement, useState } from 'react'
+
+const invalidInputCss: SerializedStyles = css({
+  color: 'red',
+  borderColor: 'red',
+})
 
 export interface AuthType {
   isLoggedIn: boolean
@@ -23,50 +18,60 @@ export const DefaultAuthContext: AuthType = {
 
 export const AuthContext = createContext<AuthType>(DefaultAuthContext)
 
-export function Auth(): ReactElement<{}> {
-  const [{ email, password, isFormValid, isLoggingIn }, dispatch] = useReducer(
-    loginFormReducer,
-    loginFormInitialState,
-  )
+const authFormInputs = {
+  email: {
+    required: true,
+    validate(value: string): boolean {
+      return !!value
+    },
+  },
+  password: {
+    required: true,
+    validate(value: string): boolean {
+      return !!value
+    },
+  },
+}
 
-  const submit = (e: FormEvent<HTMLFormElement>): void => {
-    e.preventDefault()
-    dispatch({ email, password, type: 'LOGIN' })
-    console.log({ validForm: isFormValid })
-  }
+export function Auth(): ReactElement<{}> {
+  const [isLoggingIn, setLoggingIn] = useState(false)
+  const { inputs, isFormValid, handleChanges, handleSubmit } = useForm({
+    inputs: authFormInputs,
+    submit: (state): void => {
+      setLoggingIn(true)
+      console.log(state)
+      setLoggingIn(false)
+    },
+  })
 
   return (
     <F>
-      <form onSubmit={submit}>
+      <form onSubmit={handleSubmit}>
         <label htmlFor='email'>E-mail:</label>
         <input
+          css={
+            !inputs.email.isPristine && !inputs.email.isValid && invalidInputCss
+          }
           name='email'
-          type='email'
+          onChange={handleChanges}
           placeholder='Ditige seu e-mail'
-          value={email}
-          onChange={inputChangeCb(
-            (value: string): any =>
-              dispatch({
-                email: value,
-                type: 'SET_EMAIL',
-              }),
-          )}
+          type='email'
+          value={inputs.email.value}
         />
         <label htmlFor='password'>Senha:</label>
         <input
+          css={
+            !inputs.password.isPristine &&
+            !inputs.password.isValid &&
+            invalidInputCss
+          }
           name='password'
-          type='password'
+          onChange={handleChanges}
           placeholder='Digite sua senha'
-          value={password}
-          onChange={inputChangeCb(
-            (value: string): any =>
-              dispatch({
-                password: value,
-                type: 'SET_PASSWORD',
-              }),
-          )}
+          type='password'
+          value={inputs.password.value}
         />
-        <button type='submit' disabled={isLoggingIn || !isFormValid}>
+        <button type='submit' disabled={!isFormValid || isLoggingIn}>
           Entrar
         </button>
       </form>
