@@ -1,288 +1,60 @@
-# Frontend Challenge
+# Easy Carros Challenge
 
-Desafio Easy Carros para frontend developers.
+## Rodando o projeto
 
-## Introdução
+Para rodar o projeto você precisará:
 
-Você está participando do processo para integrar o time de Produto e Tecnologia da [Easy Carros](https://easycarros.com/).
+- [] Criar um arquivo `.env` na raiz do projeto segunido o modelo em [`.env.schema`](./.env.schema)
+- [] Instalar as dependências via `npm install`
+- [] Iniciar o servidor local via `npm start` (isso irá iniciar a API também)
 
-Este desafio tem como objetivo avaliar seus *skills* na criação de código para frontend para um problema do mundo real.
+## Editando o projeto
 
-## O que é a Easy Carros?
+Para desenvolver localmente no projeto você deverá:
 
-A Easy Carros surgiu como uma plataforma de marketplace para serviços automotivos.
+- [] Criar um arquivo `.editorconfig` seguindo o modelo em [`.editorconfig-recommended`](./.editorconfig-recommended)
+- [] Criar a pasta de configuração do vscode seguindo o modelo em `.vscode-recommended`
+- [] Ao invés de apenas iniciar o projeto com `npm start` você pode usar o comando `npm run dev` ou usar `npm start` e em outro terminal rodar `npm run opn` para ter uma instância nova do chrome sem o perfil de usuário da sua máquina afim de ter um ambiente limpo para debuggar o projeto.
 
-O modelo de negócios é parecido com o do Mercado Livre ou do Uber: nós fornecemos a tecnologia que une o consumidor -- pessoa ou empresa que possua veículos automotivos -- com empreendedores independentes, especializados na prestação de serviços como: lavagem a seco, troca de óleo, martelinho de ouro, etc.
+## Sobre o estado do desafio
 
-## O desafio
+### Disclaimer
 
-Sua missão é criar uma *feature* que existe no Easy Carros Docs: controle de veículos da frota.
+No momento atual o projeto está incompleto e não atende aos requisitos [mencionados no desafio](./Challenge.md)
 
-A [API](#a-api) com o qual a aplicação deve se comunicar está inclusa neste repositório. 
+### Escolha de tecnologias e ferramentas
 
-**Você deverá executá-la para poder se comunicar com ela**. Veja as [instruções](#pré-requisitos).
+Todas as tecnologias inclusas nesse projetos são ferramentas que possuo conhecimento profundo ou tive contato préviamente.
+Algumas features utilizadas são novidades que resolvi incluir para tornar o desafio mais agradável de desenvolver. Como por exemplo o uso de `hooks` do React.
 
-[Aqui](#endpoints) está a lista de _endpoints_ disponiveis, quais dados devem ser enviados e quais serão retornados.
+A arquitetura escolhida para o projeto foi construída do zero seguindo os conhecimentos de projetos que construí ao logo da carreira.
 
-### 1. Tela de login
+### A falta de tempo
 
-![Tela de login](wireframes/01-LOGIN.png)
+Meu momento atual de carreira está um bocado caótico incluindo a saída da empresa atual que por si só está consumindo mais de mim do que naturalmente visto que a empresa atual necessita que eu finalize diversas tarefas antes da minha saída, já que com minha saída o time de desenvolvimento será diluído e o trabalho será repassado para terceiros.
 
-#### Permitir que o usuário se autentique na aplicação
+Estou em uma rotina muito pesada com várias propostas de trabalho, testes e entrevistas e devido à isso não pude dar à este projeto a atenção devida.
+Em outro cenário onde eu tivesse maior disponibilidade para executar o teste no prazo solicitado eu poderia concluílo e adicionar boas features.
 
-Ao enviar o formulário:
+### Para a análise
 
-- Validar se ambos os campos estão preenchidos.
-    - Caso algum não esteja, exibir uma mensagem de erro para o usuário.
+Espero que o código mesmo incompleto seja suficiente para analisar um pouco das minhas habilidades como desenvolvedor e mostre um pouco do processo de desenvolivmento que passo no dia a dia.
 
-Ao receber a resposta do servidor:
+Por esse projeto estar incompleto vale mencionar que em meu [github](https://github.com/wescoder) existem outros projetos que podem mostrar mais das minhas habilidades caso possa auxiliar nesta análise.
 
-- Quando as credenciais de acesso estiverem corretas, o usuário deve ser redirecionado para a página de veículos.
-- Quando as credenciais são inválidas, o usuário deve receber uma mensagem informando-o do problema.
+[https://github.com/TavernLab/tavern-web/tree/develop](https://github.com/TavernLab/tavern-web/tree/develop)
+[https://github.com/wescoder/ingresse-backend-dev/tree/develop](https://github.com/wescoder/ingresse-backend-dev/tree/develop)
+[https://github.com/wescoder/todo-concore-web](https://github.com/wescoder/todo-concore-web)
+[https://github.com/wescoder/ze-delivery/tree/develop](https://github.com/wescoder/ze-delivery/tree/develop)
 
-Informações adicionais:
+## Contributing
 
-Credenciais válidas:
+### DevTools
 
-- E-mail: `frontend-dev@easycarros.com`
-- Senha: `Fr0nt3ndR0ck5!`
+You can use the following filter for the network tab in order to filter some commonly unwanted requests:
 
-### 2. Tela de lista de veículos
+`-sockjs-node/info -websocket -method:OPTIONS -.hot-update.json`
 
-![Tela de lista de veículos](wireframes/02-LIST.png)
+You can use the following filter for the console tab in order to filter some commonly unwanted logs:
 
-#### Permitir que o usuário visualize seus veículos
-
-Exibir a lista de todos os veículos do usuário mostrando:
-
-- Placa
-
-#### Permitir que o usuário adicione novos veículos
-
-- O usuário informa uma placa no campo logo acima da lista. 
-- Ao clicar no botão enviar:
-    - Validar se a placa possui 7 caracteres alfanuméricos
-        - Caso seja válida, enviar a placa para a API
-        - Caso contrário, exibir uma mensagem de erro ao usuário
-    - Aguardar a resposta da API
-        - Caso seja inserido com sucesso, atualizar a lista de veículos
-        - Caso contrário, exibir uma mensagem de erro ao usuário
-
-#### Permitir que o usuário remova um veículo
-
-- Ao clicar no botão excluir, relacionado a cada veículo:
-    - Pedir para o usuário confirmar a exclusão
-        - Caso positivo: 
-            - Enviar a requisição de exclusão para a API
-            - Remover o veículo excluído da lista
-        - Caso negativo 
-            - Manter a lista como está
-
-## As regras do jogo
-
-- 📃 A aplicação **deve** ser uma SPA ou um mobile app.
-- 🈴 Use o framework com o qual você se sente mais confortável (aqui nós utilizamos principalmente **React** e **ReactNative**, mas qualquer framework "mainstream" é bem vindo).
-- 🖌️ Fique à vontade para modificar a aparência das telas; os wireframes são apenas para referência.
-- 🛰️ Use qualquer bibloteca para conseguir se comunicar com o backend.
-- 🚢 Envie seu código para um repositório público para leitura (Github, Bitbucket, Gitlab, etc.).
-- 🗒️ Crie um arquivo `README` na raiz do projeto com instruções detalhadas de como executar seu código.
-
-### Bônus
-
-- 📑 Unit tests para seus componentes.
-
-### Como vou ser avaliado?
-
-Vamos analisar seu código com respeito a:
-
-- Qualidadade de código
-    - Keep it simple! (KISS)
-- Boas práticas
-    - Separation of Concerns (SoC)
-    - Design patterns (se houver necessidade)
-    - Clean code
-- Code styling
-    - Use um code linter 🙏
-
-O que **NÃO** vamos analisar:
-
-- Performance
-- Escolha da tecnologia A em vez da B
-
-## Para onde enviar seu repositório
-
-Envie um email para `tech@easycarros.com` com o assunto `Desafio Frontend - [SEU NOME]` contendo o link para o repositório que você criou.
-
----
-
-
-
-## A API
-
-### Pré-requisitos
-
-Você deve instalar os seguintes pacotes antes de prosseguir:
-
- - [`yarn`](https://yarnpkg.com/lang/en/docs/install)
-
-### Executando o servidor da API
-
-Na raiz deste projeto, rode:
-
-```bash
-cd ./api
-yarn install # vai demorar um pouco
-yarn start # o servidor irá escutar a porta 8181 por padrão
-```
-
-Se tudo correr bem, você verá a seguinte mensagem no seu terminal:
-
-> App is listening on http://localhost:8181
-
-#### Solução de problemas
-
-Se ao executar `yarn start` você se deparar com um erro parecido com:
-
-```
-> Error: listen EADDRINUSE :::8181
->    at Server.setupListenHandle [as _listen2] (net.js:1330:14)
->    at listenInCluster (net.js:1378:12)
->    at Server.listen (net.js:1466:7)
->    ...
-```
-
-Significa que a porta `8181` está em uso no seu computador. Para utilizar uma porta diferente, rode:
-
-```bash
-PORT='<OUTRA PORTA>' yarn start
-```
-
-
-### Endpoints
-Este repositório contém a API que será utilizada como backend da sua aplicação. Ela possui os seguintes endpoints:
-
-1. `POST /auth`
-    - Headers:
-        - Content-Type: `application/json`
-    - Body:
-
-            {
-                "email": String
-                "password": String
-            }
-
-    - Response:
-        - Quando as credenciais são válidas:
-            - Status Code: `200`
-            - Body:
-
-                    {
-                        "data": {
-                            "token": String
-                        }
-                    }
-
-        - Quando as credenciais são inválidas:
-            - Status Code: `401`
-            - Body:
-
-                    {
-                        "error": {
-                            "message": String
-                        }
-                    }
-
-2. `GET /vehicle`
-    - Headers:
-        - Content-Type: `application/json`
-        - Authorization: `Bearer {{token}}`
-
-    - Response:
-        - Quando o token é válido:
-            - Status Code: `200`
-            - Body:
-
-                    {
-                        "data": [
-                            {
-                                "id": String
-                                "plate": String
-                            },
-                            {
-                                "id": String
-                                "plate": String
-                            },
-                            // ...
-                        ]
-                    }
-
-        - Quando o token é inválido ou inexistente:
-            - Status Code: `401`
-            - Body:
-
-                    {
-                        "error": {
-                            "message": String
-                        }
-                    }
-
-3. `POST /vehicle`
-    - Headers:
-        - Content-Type: `application/json`
-        - Authorization: `Bearer {{token}}`
-
-    - Body:
-
-            {
-                "plate": String
-            }
-
-    - Response:
-        - Quando o token e a placa são válidos:
-            - Status Code: `200`
-            - Body:
-
-                    {
-                        "data": {
-                            "id": String,
-                            "plate": String
-                        }
-                    }
-
-        - Quando o token é inválido ou inexistente:
-            - Status Code: `401`
-            - Body:
-
-                    {
-                        "error": {
-                            "message": String
-                        }
-                    }
-
-        - Quando a placa é inválida ou inexistente:
-            - Status Code: `400`
-            - Body:
-            
-                    {
-                        "error": {
-                            "message": String
-                        }
-                    }
-
-4. `DELETE /vehicle/{{id}}`
-    - Headers:
-        - Content-Type: `application/json`
-        - Authorization: `Bearer {{token}}`
-
-    - Response:
-        - Quando o token é válido:
-            - Status Code: `204`
-        - Quando o token é inválido ou inexistente:
-            - Status Code: `401`
-            - Body:
-
-                    {
-                        "error": {
-                            "message": String
-                        }
-                    }
+`-hmr -wds`
